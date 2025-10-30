@@ -510,11 +510,11 @@ header {
       }
     }
 
-    &:nth-child(n+5) {
-      @include media("M") {
-        display: none;
-      }
-    }
+    // &:nth-child(n+5) {
+    //   @include media("M") {
+    //     display: none;
+    //   }
+    // }
   }
 
   &-title {

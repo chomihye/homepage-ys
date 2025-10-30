@@ -8,24 +8,34 @@ $(document).ready(function () {
     const btnInvert = $(".btn-invert");
     const icRight = $(".right");
 
+    function isMobile() {
+        return window.innerWidth <= 1024;
+    }
+
     if (path === "/" || path === "/index.html") {
-        //초기 상태
-        header.addClass("start");
-        mainLogo.attr("src", "../../assets/img/logo-w.png");
-        btnInvert.addClass("btn-white");
-        icRight.removeClass("ic-right-w").addClass("ic-right");
+        if (isMobile()) {
+            header.addClass("scroll");
+            mainLogo.attr("src", "../../assets/img/logo-b.png");
+            btnInvert.addClass("btn-black");
+            icRight.addClass("ic-right-w");
+        } else {
+            header.addClass("start");
+            mainLogo.attr("src", "../../assets/img/logo-w.png");
+            btnInvert.addClass("btn-white");
+            icRight.removeClass("ic-right-w").addClass("ic-right");
 
-        $(window).on("scroll", function () {
-            const scrolled = $(this).scrollTop() > 0;
+            $(window).on("scroll", function () {
+                const scrolled = $(this).scrollTop() > 0;
 
-            header.toggleClass("scroll", scrolled).toggleClass("start", !scrolled);
+                header.toggleClass("scroll", scrolled).toggleClass("start", !scrolled);
 
-            mainLogo.attr("src", scrolled ? "../../assets/img/logo-b.png" : "../../assets/img/logo-w.png");
+                mainLogo.attr("src", scrolled ? "../../assets/img/logo-b.png" : "../../assets/img/logo-w.png");
 
-            btnInvert.toggleClass("btn-black", scrolled).toggleClass("btn-white", !scrolled);
+                btnInvert.toggleClass("btn-black", scrolled).toggleClass("btn-white", !scrolled);
 
-            icRight.toggleClass("ic-right-w", scrolled).toggleClass("ic-right", !scrolled);
-        });
+                icRight.toggleClass("ic-right-w", scrolled).toggleClass("ic-right", !scrolled);
+            });
+        }
     }
 
     //글자 변경
@@ -98,43 +108,36 @@ $(document).ready(function () {
     }
 
     function renderItems_REPLACE(list) {
-        imgGrid.empty(); // 1. 먼저 비우고
-        renderItems_ADD(list); // 2. '추가' 함수를 호출해 그린다
+        imgGrid.empty();
+        renderItems_ADD(list);
     }
 
     $.getJSON(dataUrl, function (data) {
         allData = data;
 
-        // --- 5. 페이지 모드 감지 ---
-        const mainPageLinkBtn = $(".more-portfolio"); // 메인 페이지 '페이지 이동' 버튼
-        const subPageLoadBtn = $(".more-btn"); // 서브 페이지 '+ 더보기' 버튼
+        const mainPageLinkBtn = $(".more-portfolio");
+        const subPageLoadBtn = $(".more-btn");
 
-        // ---------------------------------
-        // [A] 메인 페이지 모드 (index.html)
-        // ---------------------------------
         if (mainPageLinkBtn.length > 0) {
-            const pageData = allData; // 메인 페이지는 항상 모든 데이터를 다룸
+            const pageData = allData;
             const tabButtons = tabMenu.find("button");
 
-            // 1. 초기 로드 (12개만)
             renderItems_REPLACE(pageData.slice(0, 12));
-            mainPageLinkBtn.hide(); // '전체' 탭에선 숨김
+            mainPageLinkBtn.hide();
             tabButtons.filter('[data-filter="all"]').addClass("active");
 
-            // 2. 탭 클릭 이벤트 (메인 페이지용)
             tabButtons.on("click", function () {
                 tabButtons.removeClass("active");
                 $(this).addClass("active");
 
                 const filter = $(this).data("filter");
-                const link = $(this).data("link"); // ⭐️ data-link 속성을 읽음
+                const link = $(this).data("link");
 
-                // '페이지 이동' 버튼 링크 및 표시/숨김 처리
                 if (filter === "all" || !link) {
                     mainPageLinkBtn.hide();
                 } else {
                     mainPageLinkBtn.show();
-                    mainPageLinkBtn.attr("href", link); // ⭐️ 읽어온 link를 href에 설정
+                    mainPageLinkBtn.attr("href", link);
                 }
 
                 // 필터링
@@ -148,41 +151,35 @@ $(document).ready(function () {
                 // 렌더링 (항상 12개만)
                 renderItems_REPLACE(filteredList.slice(0, 12));
             });
-        }
+        } else if (subPageLoadBtn.length > 0) {
+            const itemsPerLoad = 4;
+            let currentViewData = [];
+            let loadedItemCount = 0;
 
-        // ---------------------------------
-        // [B] 서브 페이지 모드 (character.html 등)
-        // ---------------------------------
-        else if (subPageLoadBtn.length > 0) {
-            const itemsPerLoad = 4; // "더보기"로 4개씩 추가
-            let currentViewData = []; // 현재 탭/페이지의 데이터
-            let loadedItemCount = 0; // 현재 로드된 개수
+            const isMobile = $(window).width() < 768;
+            let initialItemCount = isMobile ? 4 : 12;
 
-            // "+ 더보기" 클릭 시 실행될 함수
             function loadMoreItems() {
                 const currentCount = loadedItemCount;
                 loadedItemCount += itemsPerLoad;
                 const itemsToAppend = currentViewData.slice(currentCount, loadedItemCount);
-                renderItems_ADD(itemsToAppend); // '추가'만 함
+                renderItems_ADD(itemsToAppend);
             }
 
-            // --- 서브 페이지 데이터 범위 설정 ---
             let pageData = [];
 
             if (tabMenu.length > 0) {
-                // B-1: 탭이 있는 서브 페이지 (character.html)
                 const scopeAttr = tabMenu.data("scope");
                 if (scopeAttr) {
                     const scopeList = scopeAttr.split(",").map((item) => item.trim());
                     pageData = allData.filter((item) => scopeList.includes(item.tab));
                 } else {
-                    pageData = allData; // (data-scope가 없는 예외 처리)
+                    pageData = allData;
                 }
 
                 const tabButtons = tabMenu.find("button");
                 tabButtons.filter('[data-filter="all"]').addClass("active");
 
-                // 탭 클릭 이벤트 (서브 페이지용)
                 tabButtons.on("click", function () {
                     tabButtons.removeClass("active");
                     $(this).addClass("active");
@@ -194,29 +191,24 @@ $(document).ready(function () {
                         currentViewData = pageData.filter((item) => item.tab === filter);
                     }
 
-                    loadedItemCount = 12; // 탭 클릭 시 12개로 리셋
+                    loadedItemCount = initialItemCount;
                     renderItems_REPLACE(currentViewData.slice(0, loadedItemCount));
                 });
             } else {
-                // B-2: 탭이 없는 서브 페이지 (animation.html)
                 const pageFilter = imgGrid.data("page-filter");
                 if (pageFilter) {
                     pageData = allData.filter((item) => item.tab === pageFilter);
                 } else {
-                    pageData = allData; // (예외 처리)
+                    pageData = allData;
                 }
             }
 
-            // --- 서브 페이지 공통 초기화 ---
             currentViewData = pageData;
-            loadedItemCount = 12; // 첫 로드는 12개
-            renderItems_REPLACE(currentViewData.slice(0, 12)); // 12개 '비우고 새로' 그림
+            loadedItemCount = initialItemCount;
+            renderItems_REPLACE(currentViewData.slice(0, loadedItemCount));
 
-            // "+ 더보기" 버튼에 클릭 이벤트 연결
             subPageLoadBtn.on("click", loadMoreItems);
         }
-
-        // (C) 탭도 버튼도 없는 페이지는 아무것도 하지 않음
     }).fail(function () {
         console.error("JSON 파일을 불러오는 데 실패했습니다.");
         imgGrid.html("<p>데이터를 불러올 수 없습니다.</p>");
