@@ -1,0 +1,123 @@
+@use './font' as *;
+
+@function flexFn($param) {
+    @if ($param ==center) {
+        @return center;
+    }
+
+    @if ($param ==start) {
+        @return flex-start;
+    }
+
+    @if ($param ==end) {
+        @return flex-end;
+    }
+
+    @if ($param ==sb) {
+        @return space-between;
+    }
+
+    @if ($param ==sa) {
+        @return space-around;
+    }
+
+}
+
+@mixin flex($jc: center, $ai: center) {
+    display: flex;
+    justify-content: flexFn($jc);
+    align-items: flexFn($ai);
+}
+
+@mixin pos-center($position: absolute) {
+    position: $position;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin pos-center-y {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin pos-center-x {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin font-style($size: 16, $weight: 400, $letter-percent: -2) {
+    font-size: $size + px;
+    font-weight: $weight;
+    letter-spacing: $size * ($letter-percent / 100) + px;
+}
+
+@mixin media($aa) {
+
+    @if $aa =="W" {
+        @media screen and (max-width: 1024px) {
+            @content;
+        }
+    }
+
+    @if $aa =="T" {
+        @media screen and (max-width: 768px) {
+            @content;
+        }
+    }
+
+    @if $aa =="M" {
+        @media screen and (max-width: 430px) {
+            @content;
+        }
+    }
+
+    @if $aa =="XS" {
+        @media screen and (max-width: 320px) {
+            @content;
+        }
+    }
+
+
+}
+
+
+@mixin btn-color($bg, $color, $border: none) {
+    background-color: $bg;
+    color: $color;
+    border: $border;
+}
+
+@mixin btn-size($size) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+
+    @if $size =='sm' {
+        padding: 0px 16px;
+        height: 40px;
+        @include font-style(16, 500);
+    }
+
+    @else if $size =='md' {
+        padding: 0px 24px;
+        height: 48px;
+        @include font-style(16, 500);
+
+        @include media("M") {
+            padding: 0px 16px;
+            height: 40px;
+        }
+    }
+
+    @else if $size =='lg' {
+        padding: 0px 32px;
+        height: 56px;
+        @include font-style(18, 500);
+    }
+}

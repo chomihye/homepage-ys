@@ -1,0 +1,45 @@
+@use "sass:math";
+
+@for $i from 1 through 200 {
+  .mr-#{$i} {
+    margin-right: $i + px;
+
+  }
+
+  .mt-#{$i} {
+    margin-top: $i + px;
+
+  }
+
+  .ml-#{$i} {
+    margin-left: $i + px;
+
+  }
+
+  .mb-#{$i} {
+    margin-bottom: $i + px;
+
+  }
+}
+
+@for $i from 0 through 200 {
+  .pdr-#{$i} {
+    padding-right: $i + px;
+
+  }
+
+  .pdt-#{$i} {
+    padding-top: $i + px;
+
+  }
+
+  .pdl-#{$i} {
+    padding-left: $i + px;
+
+  }
+
+  .pdb-#{$i} {
+    padding-bottom: $i + px;
+
+  }
+}

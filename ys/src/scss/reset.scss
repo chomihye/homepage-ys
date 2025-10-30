@@ -1,0 +1,87 @@
+@use './font' as *;
+@use './mixin' as *;
+@use './class' as *;
+@use './flex' as *;
+@use './display' as *;
+@use './align' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Pretendard, sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+  color: #222;
+}
+
+select {
+  background: #fff;
+}
+
+input {
+  border: none;
+
+  &:active {
+    border: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+}
+
+
+
+textarea {
+  width: 100%;
+  // border: 1px solid $border;
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+em {
+  font-style: normal;
+}

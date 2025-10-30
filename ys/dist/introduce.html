@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <!--jquery  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <header>
+  <div class="header-inner">
+    <a href="../index.html" class="main-logo">
+      <img src="../../assets/img/logo-b.png" alt="영성미디어 로고" class="logo-black">
+      <img src="../../assets/img/logo-w.png" alt="영성미디어 로고" class="logo-white">
+    </a>
+    <nav>
+      <ul class="d-flex header-menu">
+        <li><a href="../introduce.html">회사소개</a></li>
+        <li><a href="../animation.html">애니메이션</a></li>
+        <li><a href="../character.html">캐릭터 &#183; 삽화</a></li>
+        <li><a href="../video.html">영상디자인</a></li>
+      </ul>
+    </nav>
+    <a href="../request.html" class="btn-black btn-md gap-12 btn-invert btn-request">
+      문의하기
+      <span class="right ic-right-w"></span>
+    </a>
+    <button type="button" class="menu-btn">
+      <span class="ic-menu"></span>
+    </button>
+  </div>
+  <div class="mobile-menu">
+    <div class="mobile-close">
+      <button type="button" class="close mobile-close-btn"></button>
+    </div>
+    <ul class="mobile-header-menu">
+      <li><a href="../introduce.html">회사소개</a></li>
+      <li><a href="../animation.html">애니메이션</a></li>
+      <li><a href="../character.html">캐릭터 &#183; 삽화</a></li>
+      <li><a href="../video.html">영상디자인</a></li>
+      <li><a href="../request.html">제작문의</a></li>
+    </ul>
+  </div>
+</header>
+    <main>
+      <section class="bg-video">
+        <video autoplay muted loop src="../assets/video/video2.mp4"></video>
+        <div class="bg-video-text">
+          <p class="change-text text-center" id="change-text"></p>
+        </div>
+        <div class="scroll-down">
+          <span class="ic-down"></span>
+          <div class="scroll-text">scroll down</div>
+        </div>
+      </section>
+      <section class="business">
+        <h2 class="title text-center">사업영역</h2>
+        <div class="box-grid">
+          <div class="row">
+            <div class="box">
+              <div class="d-flex box-inner f-column">
+                <div class="box-title">
+                  <div class="box-title-wrap">
+                    <h3>경영기획 관리부</h3>
+                    <span class="ic-arrow-down"></span>
+                  </div>
+                  <span class="ic-blackboard"></span>
+                </div>
+                <div class="box-content">
+                  <ul class="d-flex f-column">
+                    <li>운영지원팀</li>
+                    <li>경영지원팀</li>
+                    <li>기획/개발사업팀</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <div class="d-flex box-inner f-column">
+                <div class="box-title">
+                  <div class="box-title-wrap">
+                    <h3>방송제작부</h3>
+                    <span class="ic-arrow-down"></span>
+                  </div>
+                  <span class="ic-live"></span>
+                </div>
+                <div class="box-content">
+                  <ul class="d-flex f-column">
+                    <li>EBS 솔루션팀</li>
+                    <li>EBS 방송기술팀</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <div class="d-flex box-inner f-column">
+                <div class="box-title">
+                  <div class="box-title-wrap">
+                    <h3>콘텐츠 사업부</h3>
+                    <span class="ic-arrow-down"></span>
+                  </div>
+                  <span class="ic-contract"></span>
+                </div>
+                <div class="box-content">
+                  <ul class=" d-flex f-column ">
+                    <li>기획교수설계팀</li>
+                    <li>R&D팀</li>
+                    <li>이러닝팀</li>
+                    <li>솔루션 개발팀</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class=" box">
+              <div class="d-flex box-inner f-column">
+                <div class="box-title">
+                  <div class="box-title-wrap">
+                    <h3>디지털북 사업부</h3>
+                    <span class="ic-arrow-down"></span>
+                  </div>
+                  <span class="ic-guide"></span>
+                </div>
+                <div class="box-content">
+                  <ul class="d-flex f-column">
+                    <li>개발1팀</li>
+                    <li>개발2팀</li>
+                    <li>개발3팀</li>
+                    <li>e-Book 솔루션 개발팀</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="box">
+              <div class="box-inner d-flex f-column">
+                <div class="box-title">
+                  <div class="box-title-wrap">
+                    <h3>영상 사업부</h3>
+                    <span class="ic-arrow-down"></span>
+                  </div>
+                  <span class="ic-videoplayer"></span>
+                </div>
+                <div class="box-content">
+                  <div class="d-flex">
+                    <ul class="d-flex f-column ul-left">
+                      <li>인코딩팀</li>
+                      <li>CG 디자인팀</li>
+                      <li>자막제작팀</li>
+                      <li>수화방송팀</li>
+                    </ul>
+                    <ul class="d-flex f-column">
+                      <li>수화방송팀</li>
+                      <li>촬영/편집팀</li>
+                      <li>녹음/오디오/음향팀</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <div class="box-inner d-flex f-column">
+                <div class="box-title">
+                  <div class="box-title-wrap">
+                    <h3>애니메이션 사업부</h3>
+                    <span class="ic-arrow-down"></span>
+                  </div>
+                  <span class="ic-layers"></span>
+                </div>
+                <div class="box-content">
+                  <ul class="d-flex f-column ul-left">
+                    <li>제작1팀(2D플래시)</li>
+                    <li>제작2팀(2D작화)</li>
+                    <li>제작3팀(3D)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <div class="box-inner d-flex f-column">
+                <div class="box-title">
+                  <div class="box-title-wrap">
+                    <h3>디자인 사업부</h3>
+                    <span class="ic-arrow-down"></span>
+                  </div>
+                  <span class="ic-webdesign"></span>
+                </div>
+                <div class="box-content">
+                  <div class="d-flex">
+                    <ul class="d-flex f-column ul-left">
+                      <li>시각디자인</li>
+                      <li>영상디자인</li>
+                      <li>패키지디자인</li>
+                      <li>일러스트/삽화</li>
+                    </ul>
+                    <ul class="d-flex f-column">
+                      <li>웹디자인</li>
+                      <li>UI디자인</li>
+                      <li>캐릭터디자인</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="timeline">
+        <h2 class="title text-center">회사연혁</h2>
+        <div class="timeline-inner">
+          <div class="timeline-wrap">
+            <div class="timeline-track"></div>
+            <div class="timeline-progress"></div>
+          </div>
+          <div class="timeline-item">
+            <div class="year red">
+              <span class="year-text">2025</span>
+              <span class="circle"></span>
+            </div>
+            <div class="details">
+              <div><span class="month">09</span><span class="text gy">경기도교육청 ‘나침반’ 안전교육 2차 애니메이션 제작</span></div>
+              <div><span class="month">03</span><span class="text gy">충남교육연수화물 도로교통법 판례등 법률해석 애니메이션 제작</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year red">
+              <span class="year-text">2024</span>
+              <span class="circle"></span>
+            </div>
+            <div class="details">
+              <div><span class="month">09</span><span class="text gy">나이지리아 교과서 애니메이션 제작</span></div>
+              <div><span class="month">03</span><span class="text gy">충남교육연수화물 도로교통법 판례등 법률해석 애니메이션
+                  제작</span></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year">
+              <span class="year-text">2023</span>
+              <span class="circle"></span>
+            </div>
+            <div class="details">
+              <div><span class="month">10</span><span class="text">경기도 안전공제회 유치원,초등 안전 2차 애니메이션 제작</span></div>
+              <div><span class="month">07</span><span class="text">EBS 유아,초중고 교육콘텐츠 제작</span></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year">
+              <span class="year-text">2022</span>
+              <span class="circle"></span>
+            </div>
+            <div class="details">
+              <div><span class="month">08</span><span class="text">대한체육회 K족구 애니메이션 제작</span></div>
+              <div><span class="month">05</span><span class="text">비상 초등사회 5,6 학년군 디지털 교과서 개발 사업</span></div>
+              <div><span class="month">02</span><span class="text">경기도 교육청 학생(교사)주도 맞춤형 콘텐츠 애니메이션 제작</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year">
+              <span class="year-text">2021</span>
+              <span class="circle"></span>
+            </div>
+            <div class="details">
+              <div><span class="month">10</span><span class="text">경기도 안전공제회 유치원, 초등 안전 1차 애니메이션 제작</span></div>
+              <div class="d-flex"><span class="month">09</span>
+                <p class="d-flex f-column">
+                  <span class="text">한국과학창의재단 우수과학 문화상품 홍보영상 및 카달로그 제작</span><br>
+                  <span class="text">웅진 씽큐 애니메이션 제작</span><br>
+                  <span class="text">한국과학창의재단 ‘똑똑 수학탐험대’ 애니메이션 제작</span>
+                </p>
+              </div>
+              <div class="d-flex"><span class="month">01</span>
+                <p class="d-flex f-column">
+                  <span class="text">비상 초등사회 3,4학년군 디지털 교과서 개발 사업</span></br>
+                  <span class="text">EBS 교육방송 ‘헬로우 소프트웨어’ 책자 디자인/인쇄/서점 발송</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year"><span class="year-text">2020</span><span class="circle"></span>
+            </div>
+            <div class="details">
+              <div><span class="month">11</span><span class="text">경기도 교육청 ‘나침반’ 안전교육 1차 애니메이션 제작</span></div>
+              <div><span class="month">08</span><span class="text">정상 JLS 초등수학 애니메이션 개발</span></div>
+              <div><span class="month">02</span><span class="text">EBS 수어방송 제작</span></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year">
+              <span class="year-text">2019</span>
+              <span class="circle"></span>
+            </div>
+            <div class="details">
+              <div><span class="month">11</span><span class="text">대한체육회 스포츠 7330 홍보 SONG 애니메이션 제작</span></div>
+              <div><span class="month">06</span><span class="text">공공보건 의료재단 ‘간호간병통합서비스’ 애니메이션 제작</span></div>
+              <div><span class="month">04</span><span class="text">동심 English Doo 하이브리드 CD 애니메이션 제작</span></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year"><span class="year-text">2017</span><span class="circle"></span></div>
+            <div class="details">
+              <div><span class="month">12</span><span class="text">교육개발원 자유학기제 애니메이션 개발</span></div>
+              <div><span class="month">01</span><span class="text">한국과학창의재단 교육과정 연계수학 ALLDA 애니메이션 제작</span></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year"><span class="year-text">2016</span><span class="circle"></span></div>
+            <div class="details">
+              <div><span class="month">11</span><span class="text">국가평생교육원 문예교육 애니메이션 개발</span></div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="year"><span class="year-text">1999</span><span class="circle"></span></div>
+            <div class="details">
+              <div><span class="month">10</span><span class="text">영성미디어 주식회사 설립</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      <div class="ask">
+  <div class="ask-line">
+    <div class="ask-text">애니메이션 또는 캐릭터 제작이 필요하신가요?</div>
+    <a href="" class="btn-lg btn-border ask-btn pdl-60">
+      빠른 문의하기
+    </a>
+  </div>
+  <div class="ask-line-bt">
+    <div class="ask-text">카카오톡으로 언제든지 쉽고 빠르게 문의가 가능합니다</div>
+    <a href="" class="btn-lg btn-border ask-kakao pdl-60">카카오톡 문의</a>
+  </div>
+</div>
+
+    </main>
+    <footer>
+  <div class="footer-info">
+    <a href="../index.html">
+      <img src="../../assets/img/logo-g.png" alt="영성미디어 로고">
+    </a>
+    <div class="footer-info-wrap">
+      <div class="company">(주)영성미디어주식회사</div>
+      <div class="footer-info-group">
+        <div class="footer-bottom">
+          <div class="item">
+            <span class="label">대표</span>
+            <span class="value">이경철</span>
+          </div>
+          <div class="item">
+            <span class="label">사업자등록번호</span>
+            <span class="value">128-30-25567</span>
+          </div>
+          <div class="item">
+            <span class="label">주소</span>
+            <span class="value">경기도 고양시 일산동구 대산로 31 65-3 301호</span>
+          </div>
+        </div>
+        <div class="footer-top">
+          <div class="item d-flex ai-center">
+            <span class="ic-tel"></span><span class="label">대표전화</span>
+            <a href="tel:031-123-4567" class="valueline">031-123-4567</a>
+          </div>
+          <div class="item d-flex ai-center">
+            <span class="ic-mail-b"></span><span class="label">대표메일</span>
+            <a href="mailto:abcde1234@gmail.com" class="valueline">abcde1234@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">Copyright © 영성미디어주식회사. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>
+
+<script src="./js/index.js" type="text/javascript"></script>

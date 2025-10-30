@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <%- include("part/_header") %>
+    <main class="header-padding">
+      <div class="thumb-section center">
+        <h2 class=" text-center">애니메이션</h2>
+        <div class="img-grid ani-grid" data-page-filter="animation">
+        </div>
+      </div>
+      <div class="d-flex jc-center more-btn">
+        <button type="button" class="btn-border btn-md gap-12">더보기
+          <span class="ic-plus"></span>
+        </button>
+      </div>
+      <div class="pro">
+        <h2 class="text-center">애니메이션 제작 과정</h2>
+        <p class="text-center">애니메이션 제작은 <b>Pre-production</b> <span class="bar-gy"></span>
+          <b>Production</b><span class="bar-gy"></span><b>Post-Production</b> 순서로 진행됩니다.
+        </p>
+        <div class="pro-wrap">
+          <div class="pro-img">
+            <div class="pro-img-wrap">
+              <img src="../assets/img/ani/pre.png" alt="">
+            </div>
+            <div class="pro-img-text">
+              <div>
+                Pre-production
+              </div>
+              <p class="pro-web">
+                기획<span class="bar-wh"></span>스탭구성<span class="bar-wh"></span>제작회의<span class="bar-wh"></span>자료조사
+                <br>스토리보드 작성
+              </p>
+              <p class="pro-mobile">
+                기획<span class="bar-wh"></span>스탭구성<span class="bar-wh"></span>제작회의<span class="bar-wh"></span>
+                <br>자료조사<span class="bar-wh"></span>스토리보드 작성
+              </p>
+            </div>
+          </div>
+          <div class="pro-img">
+            <div class="pro-img-wrap">
+              <img src="../assets/img/ani/pro.png" alt="">
+            </div>
+            <div class="pro-img-text">
+              <div>
+                Production
+              </div>
+              <p class="pro-web">
+                드로잉<span class="bar-wh"></span>애니메이션<span class="bar-wh"></span>가녹음<span class="bar-wh"></span>가편집
+              </p>
+              <p class="pro-mobile">
+                드로잉<span class="bar-wh"></span>애니메이션<span class="bar-wh"></span><br>가녹음<span class="bar-wh"></span>가편집
+              </p>
+            </div>
+          </div>
+          <div class="pro-img">
+            <div class="pro-img-wrap">
+              <img src="../assets/img/ani/post.png" alt="">
+            </div>
+            <div class="pro-img-text">
+              <div>
+                Post-production
+              </div>
+              <p class="pro-web">
+                본편집<span class="bar-wh"></span>종합편집<span class="bar-wh"></span>나레이션<span class="bar-wh"></span>자료조사
+                <br>녹음<span class="bar-wh"></span>믹싱
+              </p>
+              <p class="pro-mobile">
+                본편집<span class="bar-wh"></span>종합편집<span class="bar-wh"></span>나레이션<span
+                  class="bar-wh"></span><br>자료조사<span class="bar-wh"></span>
+                녹음<span class="bar-wh"></span>믹싱
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include("part/_ask") %>
+    </main>
+    <%- include("part/_footer") %>
+</body>
+
+</html>
+<script src="../js/index.js"></script>
