@@ -90,18 +90,17 @@ $(document).ready(function () {
             const playBtn = hasVideo ? `<span class="ic-play"></span>` : "";
             const videoDataAttr = hasVideo ? `data-video-src="${item.video}"` : "";
             const itemHtml = `
-                <div class="img-item" ${videoDataAttr}>
-                    <div class="img-item-wrap">
-                        <img src="${item.image}" alt="${item.title}">
-                         ${playBtn}
-                    </div>
-                    <div class="img-title">
-                        ${item.title}
-                        <span class="bar-gy"></span>
-                        <span class="category">${item.category}</span>
-             
-                    </div>
+            <div class="img-item" data-id="${item.id}" ${videoDataAttr}>
+                <div class="img-item-wrap">
+                    <img src="${item.image}" alt="${item.title}">
+                     ${playBtn}
                 </div>
+                <div class="img-title">
+                    ${item.title}
+                    <span class="bar-gy"></span>
+                    <span class="category">${item.category}</span>
+                </div>
+            </div>
             `;
             imgGrid.append(itemHtml);
         });
@@ -215,39 +214,119 @@ $(document).ready(function () {
     });
 
     //팝업 슬라이드
-    const popup = $(".popup");
-    const popupTitle = $(".popup-title");
-    const popupAuthor = $(".popup-author");
-    const popupCategory = $(".popup-category");
     const popupOverlay = $(".popup-overlay");
+    const popupVideo = $(".popup-video");
+    const popupSlider = $(".popup-slider");
     const closeBtn = $(".popup-close .close");
-    const videoPopup = $(".popup-overlay.video");
 
     // 이미지 클릭 시 팝업 열기
-    imgGrid.on("click", ".img-item img", function () {
-        const parent = $(this).closest(".img-item"); // 클릭한 이미지의 부모
-        const title = parent.data("title");
-        const category = parent.data("category");
-        const client = parent.data("client");
+    $(document).on("click", ".img-item", function () {
+        const itemId = $(this).data("id");
+        const item = allData.find((data) => data.id === itemId);
 
-        // 팝업 내용 채우기
-        popupTitle.text(title);
-        popupAuthor.text(client);
-        popupCategory.text(category);
+        console.log("클릭한 ID:", itemId);
+        console.log("찾은 item:", item);
+        console.log("slideImg:", item?.slideImg);
+        console.log("video 있나?:", item?.video);
 
-        // 팝업 열기
-        popupOverlay.addClass("active");
+        if (!item) return;
 
-        //닫기
-        closeBtn.on("click", function () {
-            popupOverlay.removeClass("active");
-        });
-        popupOverlay.on("click", function (e) {
-            if ($(e.target).is(".popup-overlay")) {
-                popupOverlay.removeClass("active");
+        // 팝업 정보 채우기
+        $(".popup-title").text(item.title);
+        $(".popup-author").text(item.client || "");
+        $(".popup-category").text(item.category);
+
+        // 날짜 처리
+        if (item.date) {
+            $(".popup-date").text(item.date).show();
+            $(".popup-date").prev(".bar-gy").show();
+        } else {
+            $(".popup-date").hide();
+            $(".popup-date").prev(".bar-gy").hide();
+        }
+
+        // 비디오인 경우
+        if (item.video) {
+            popupVideo.show();
+            popupSlider.hide();
+
+            const videoElement = popupVideo.find("video");
+            videoElement.find("source").attr("src", item.video);
+            videoElement[0].load();
+        }
+        // 이미지인 경우
+        else {
+            popupVideo.hide();
+            popupSlider.show();
+
+            if (window.mySwiper) {
+                window.mySwiper.destroy(true, false);
+                window.mySwiper = null;
             }
-        });
+
+            // 스와이퍼 슬라이드 생성
+            const swiperWrapper = $(".swiper-wrapper");
+            swiperWrapper.empty();
+
+            console.log("item 전체:", item);
+            console.log("item.slideImgㄹㄹㄹㄹㄹㄹ:", item.slideImg);
+            console.log("item.imageㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ:", item.image);
+
+            // slideImg 배열이 있으면 여러 장, 없으면 단일 이미지
+            const slideImages = item.slideImg && item.slideImg.length > 0 ? item.slideImg : [item.image];
+            slideImages.forEach((img) => {
+                swiperWrapper.append(`
+                <div class="swiper-slide">
+                    <div class="swiper-img-wrap"><img src="${img}" alt=""></div>
+                </div>
+            `);
+            });
+
+            // 스와이퍼 재초기화
+            const screenWidth = $(window).width();
+
+            if (screenWidth > 768) {
+                window.mySwiper = new Swiper(".mySwiper", {
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true
+                    },
+                    loop: slideImages.length > 1,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false
+                    },
+                    slidesPerView: "auto",
+                    spaceBetween: 8,
+                    centeredSlides: true
+                });
+            }
+        }
+
+        popupOverlay.addClass("active");
+        $("body").css("overflow", "hidden");
     });
+
+    closeBtn.on("click", function () {
+        closePopup();
+    });
+
+    popupOverlay.on("click", function (e) {
+        if ($(e.target).is(".popup-overlay")) {
+            closePopup();
+        }
+    });
+
+    function closePopup() {
+        popupOverlay.removeClass("active");
+        $("body").css("overflow", "");
+
+        const videoElement = popupVideo.find("video")[0];
+        if (videoElement) {
+            videoElement.pause();
+            videoElement.currentTime = 0;
+        }
+    }
 
     //문의페이지 제출하기
     const submitBtn = $(".submit-btn");

@@ -26,12 +26,46 @@
           <div class="img-grid">
           </div>
         </div>
+        <div class="popup-overlay">
+          <div class="popup">
+            <div class="popup-close"><button class="close"></button></div>
+            <div class="popup-inner">
+              <div class="popup-head">
+                <div>
+                  <h3 class="popup-title">팝업제목</h3>
+                  <div>
+                    <span class="popup-author">경기도교육청</span>
+                    <span class="bar-gy"></span>
+                    <span class="popup-category">카테고리</span>
+                    <span class="bar-gy"></span>
+                    <span class="popup-date">날짜</span>
+                  </div>
+                </div>
+              </div>
+              <div class="popup-content">
+                <div class="popup-video">
+                  <video controls>
+                    <source src="../assets/video/video1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="popup-slider" style="display:none;">
+                  <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="text-center">
         <button type="button" class="more-btn btn-border btn-md gap-12">더보기
           <span class="ic-plus"></span>
         </button>
       </div>
+
       <%- include("part/_ask") %>
     </main>
     <%- include("part/_footer") %>

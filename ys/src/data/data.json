@@ -6,7 +6,7 @@
         "client": "대한체육회",
         "category": "애니메이션",
         "image": "../assets/img/ani/01.png",
-        "video": "../assets/video/video3.mp4"
+        "video": "../assets/video/video2.mp4"
     },
     {
         "id": 2,
@@ -14,7 +14,8 @@
         "tab": "animation",
         "client": "제안서",
         "category": "애니메이션",
-        "image": "../assets/img/ani/02.png"
+        "image": "../assets/img/ani/02.png",
+        "video": "../assets/video/video1.mp4"
     },
     {
         "id": 3,
@@ -86,7 +87,8 @@
         "tab": "animation",
         "client": "나이지리아ICT",
         "category": "애니메이션",
-        "image": "../assets/img/ani/11.png"
+        "image": "../assets/img/ani/11.png",
+        "slideImg": ["../assets/img/slide/test1.png", "../assets/img/slide/test2.png", "../assets/img/slide/test3.png"]
     },
     {
         "id": 12,
