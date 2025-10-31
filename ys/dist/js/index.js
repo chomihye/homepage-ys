@@ -94,9 +94,12 @@ $(document).ready(function () {
                 <div class="img-item-wrap">
                     <img src="${item.image}" alt="${item.title}">
                      ${playBtn}
+                    <div class="hover-overlay">
+                        <span class="hover-title">${item.title}</span>
+                    </div>
                 </div>
                 <div class="img-title">
-                    ${item.title}
+                    ${item.client}
                     <span class="bar-gy"></span>
                     <span class="category">${item.category}</span>
                 </div>
@@ -224,11 +227,6 @@ $(document).ready(function () {
         const itemId = $(this).data("id");
         const item = allData.find((data) => data.id === itemId);
 
-        console.log("클릭한 ID:", itemId);
-        console.log("찾은 item:", item);
-        console.log("slideImg:", item?.slideImg);
-        console.log("video 있나?:", item?.video);
-
         if (!item) return;
 
         // 팝업 정보 채우기
@@ -268,11 +266,6 @@ $(document).ready(function () {
             const swiperWrapper = $(".swiper-wrapper");
             swiperWrapper.empty();
 
-            console.log("item 전체:", item);
-            console.log("item.slideImgㄹㄹㄹㄹㄹㄹ:", item.slideImg);
-            console.log("item.imageㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ:", item.image);
-
-            // slideImg 배열이 있으면 여러 장, 없으면 단일 이미지
             const slideImages = item.slideImg && item.slideImg.length > 0 ? item.slideImg : [item.image];
             slideImages.forEach((img) => {
                 swiperWrapper.append(`
@@ -344,7 +337,7 @@ $(document).ready(function () {
     const playBtn = $(".img-item .img-item-wrap .ic-play");
 
     imgGrid.on("click", ".ic-play", function () {
-        const parent = $(this).closest(".img-item"); // 클릭한 이미지의 부모
+        const parent = $(this).closest(".img-item");
         console.log(parent);
     });
 
@@ -357,22 +350,20 @@ $(document).ready(function () {
 
     if (items.length === 0 || circles.length === 0) return;
 
-    // 1. 빨간색 라인 애니메이션
     gsap.to(".timeline-progress", {
-        clipPath: "inset(0 0 0% 0)", // ◀ 'clip-path'로 애니메이션
-        ease: "none", // ◀ 'ease: "none"' (선형) 필수!
+        clipPath: "inset(0 0 0% 0)",
+        ease: "none",
 
         scrollTrigger: {
             trigger: circles[0],
-            start: "center center", // ◀ 기준: 첫 번째 점의 '중앙'
+            start: "center center",
             endTrigger: circles[circles.length - 1],
-            end: "center center", // ◀ 기준: 마지막 점의 '중앙'
-            scrub: true, // ◀ 'scrub: true' (즉각 반응) 필수!
+            end: "center center",
+            scrub: true,
             markers: false
         }
     });
 
-    // 2. 각 타임라인 아이템 활성화
     items.forEach((item) => {
         const circleEl = item.querySelector(".circle");
 
@@ -380,7 +371,7 @@ $(document).ready(function () {
             gsap.to(item, {
                 scrollTrigger: {
                     trigger: circleEl,
-                    start: "center center", // ◀ 기준: 각 점의 '중앙' (라인과 동일)
+                    start: "center center",
 
                     onEnter: () => item.classList.add("active"),
                     onLeaveBack: () => item.classList.remove("active"),

@@ -43,7 +43,7 @@
     },
     {
         "id": 6,
-        "title": "안전생활 빵빵이_음식을 먹기 전에 깨끗하게 손을 씻어요",
+        "title": "안전생활 뿡뿡이_음식을 먹기 전에 깨끗하게 손을 씻어요",
         "tab": "animation",
         "client": "EBS",
         "category": "애니메이션",
@@ -423,7 +423,13 @@
         "tab": "illustration",
         "client": "한국교육개발원",
         "category": "삽화",
-        "image": "../assets/img/illust/1.png"
+        "image": "../assets/img/illust/1.png",
+        "slideImg": [
+            "../assets/img/slide/test1.png",
+            "../assets/img/slide/test2.png",
+            "../assets/img/slide/test3.png",
+            "../assets/img/slide/test1.png"
+        ]
     },
     {
         "id": 54,
@@ -583,8 +589,7 @@
         "tab": "character",
         "client": "나이지리아ICT",
         "category": "캐릭터",
-        "image": "../assets/img/char/1.png",
-        "slideImg": ["../assets/img/slide/test1.png", "../assets/img/slide/test2.png", "../assets/img/slide/test3.png"]
+        "image": "../assets/img/char/1.png"
     },
     {
         "id": 74,

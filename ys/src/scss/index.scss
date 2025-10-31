@@ -10,6 +10,7 @@
 
   &-black {
     @include btn-color(#000, #fff, );
+
   }
 
   &-white {
@@ -18,10 +19,17 @@
 
   &-gray {
     @include btn-color(#EEEEEE, #444);
+
+
+
   }
 
   &-border {
     @include btn-color(#ffffff, #111, 1px solid #ccc);
+
+    &:hover:not(.ask-btn):not(.ask-kakao) {
+      @include btn-color(#F6F6F6, #111, 1px solid #ccc);
+    }
   }
 
 
@@ -436,6 +444,11 @@ header {
     @include media("M") {
       width: 100%;
     }
+
+    &:hover {
+      background-color: #CC0000;
+      transition: background-color 0.4s ease;
+    }
   }
 }
 
@@ -469,7 +482,6 @@ header {
       position: relative;
 
 
-
       .ic-play {
         display: inline-block;
         position: absolute;
@@ -488,7 +500,6 @@ header {
           height: 40px;
         }
 
-
         @include media("T") {
           top: 77%;
           right: -6%;
@@ -506,15 +517,44 @@ header {
         width: 100%;
         height: auto;
         border-radius: 16px;
-        object-fit: cover
+        object-fit: cover;
+
+      }
+
+      .hover-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 98%;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover .hover-overlay {
+        opacity: 1;
       }
     }
 
-    // &:nth-child(n+5) {
-    //   @include media("M") {
-    //     display: none;
-    //   }
-    // }
+
+
+    .hover-title {
+      @include font-style(18, 700);
+      color: #fff;
+      padding: 0px 38px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+
+    }
   }
 
   &-title {
