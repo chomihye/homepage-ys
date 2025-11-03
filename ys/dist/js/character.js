@@ -43,7 +43,7 @@ $(document).ready(function () {
         mobileMenu.removeClass("active");
     });
 
-    const dataUrl = "/data/data.json";
+    const dataUrl = "./data/data.json";
     const imgGrid = $(".img-grid");
     let allData = [];
 

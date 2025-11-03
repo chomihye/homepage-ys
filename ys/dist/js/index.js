@@ -78,7 +78,7 @@ $(document).ready(function () {
     });
 
     //이미지 넣기
-    const dataUrl = "/data/data.json";
+    const dataUrl = "./data/data.json";
     const imgGrid = $(".img-grid");
     let allData = [];
     const tabMenu = $(".tab-menu");

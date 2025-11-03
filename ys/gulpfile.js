@@ -12,19 +12,12 @@ const rename = require("gulp-rename");
 const del = require("del");
 const fs = require("fs");
 const path = require("path");
-const replace = require("gulp-replace"); // 1. gulp-replace 불러오기
+const replace = require("gulp-replace");
 
 // --------------------
-// 2. 환경 변수 및 경로 설정
+// 환경 변수 설정
 // --------------------
 const isProd = process.env.NODE_ENV === "production";
-
-// ⭐️ 중요: 사용자님의 서버 경로 '~mihye'를 반영했습니다.
-// 'http://.../~mihye/' 처럼 배포될 것이므로 '/~mihye'로 설정합니다.
-const PROD_BASE_PATH = "/~mihye"; // ⭐️ 수정됨!
-
-// 개발 서버(dist)의 루트 경로
-const DEV_BASE_PATH = "/";
 
 // --------------------
 // SCSS → CSS
@@ -40,28 +33,31 @@ function styles() {
 }
 
 // --------------------
-// JS 복사 (★ v1의 핵심 ★)
+// JS 복사 (경로 수정 포함) ⭐️ 여기!
 // --------------------
 function scripts() {
     return gulp
         .src("src/js/**/*.js")
-        .pipe(
-            // 3. __BASE_PATH__ 문자열을 환경에 맞는 경로로 교체
-            replace("__BASE_PATH__", isProd ? PROD_BASE_PATH : DEV_BASE_PATH)
-        )
+        .pipe(replace('"/data/', '"./data/'))
+        .pipe(replace("'/data/", "'./data/"))
+        .pipe(replace('"/assets/', '"./assets/'))
+        .pipe(replace("'/assets/", "'./assets/"))
         .pipe(gulp.dest("dist/js"))
         .pipe(browserSync.stream());
 }
 
 // --------------------
-// NEW: JSON 데이터 복사
+// JSON 데이터 복사
 // --------------------
 function copyData() {
-    return gulp.src("src/data/**/*.json").pipe(gulp.dest("dist/data"));
+    return gulp
+        .src("src/data/**/*.json")
+        .pipe(replace('"../assets/', '"./assets/'))
+        .pipe(replace("'../assets/", "'./assets/"))
+        .pipe(gulp.dest("dist/data"));
 }
-
 // --------------------
-// assets 복사 (fs 기반, 이미지 깨짐 방지)
+// assets 복사
 // --------------------
 function copyAssets(cb) {
     const srcDir = "src/assets";
@@ -89,22 +85,21 @@ function copyAssets(cb) {
 }
 
 // --------------------
-// EJS → HTML (★ v1의 핵심 ★)
+// EJS → HTML (경로 수정 포함)
 // --------------------
 function views() {
-    return (
-        gulp
-            .src(["src/views/**/*.ejs", "!src/views/**/_*.ejs"])
-            // 4. EJS 템플릿에 'basePath' 변수 전달
-            .pipe(ejs({ basePath: isProd ? PROD_BASE_PATH : DEV_BASE_PATH }, {}, { ext: ".html" }).on("error", console.error))
-            .pipe(rename({ extname: ".html" }))
-            .pipe(gulp.dest("dist"))
-            .pipe(browserSync.stream())
-    );
+    return gulp
+        .src(["src/views/**/*.ejs", "!src/views/**/_*.ejs"])
+        .pipe(ejs({}, {}, { ext: ".html" }).on("error", console.error))
+        .pipe(rename({ extname: ".html" }))
+        .pipe(replace(/\.\.\/..\//g, "./"))
+        .pipe(replace(/\.\.\//g, "./"))
+        .pipe(gulp.dest("dist"))
+        .pipe(browserSync.stream());
 }
 
 // --------------------
-// dist 초기화(clean)
+// dist 초기화
 // --------------------
 function clean() {
     return del(["dist/**", "!dist"]);
@@ -115,12 +110,11 @@ function clean() {
 // --------------------
 function serve() {
     browserSync.init({
-        server: { baseDir: "dist", index: "index.html" },
-        startPath: DEV_BASE_PATH // 개발 서버 시작 시 루트 경로
+        server: { baseDir: "dist", index: "index.html" }
     });
     gulp.watch("src/scss/**/*.scss", styles);
     gulp.watch("src/js/**/*.js", scripts);
-    gulp.watch("data/**/*.json", copyData).on("change", browserSync.reload);
+    gulp.watch("src/data/**/*.json", copyData).on("change", browserSync.reload);
     gulp.watch("src/assets/**/*", copyAssets).on("change", browserSync.reload);
     gulp.watch("src/views/**/*.ejs", views);
 }
@@ -135,8 +129,5 @@ exports.scripts = scripts;
 exports.views = views;
 exports.copyData = copyData;
 
-// default: clean → 빌드 → serve
 exports.default = gulp.series(clean, gulp.parallel(styles, scripts, copyAssets, views, copyData), serve);
-
-// build만: clean → 빌드
 exports.build = gulp.series(clean, gulp.parallel(styles, scripts, copyAssets, views, copyData));
