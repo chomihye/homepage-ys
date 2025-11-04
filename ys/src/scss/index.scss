@@ -418,8 +418,9 @@ header {
 
 
 .tab-content {
-  margin-bottom: 50px;
+  margin-bottom: 184px;
   padding: 0px 80px;
+
 
   @include media("W") {
     padding: 0px 20px;
@@ -431,7 +432,7 @@ header {
     justify-content: center;
     height: 56px;
     padding: 0px 35px;
-    margin: 40px 0px 80px;
+    margin-top: 40px;
     border-radius: 28px;
     background-color: #111;
     color: #fff;
@@ -740,7 +741,7 @@ header {
     margin: 120px 0 64px;
     color: #111;
 
-    @include media("T") {
+    @include media("W") {
       @include font-style(32, 700);
       margin: 80px 0px 48px;
     }
@@ -753,13 +754,15 @@ header {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     border-radius: 16px;
 
-    @include media("T") {
+    @include media("W") {
       height: auto;
     }
 
     &-content {
+      display: flex;
 
-      @include media("T") {
+
+      @include media("W") {
         display: none;
 
         &.active {
@@ -777,12 +780,11 @@ header {
 
     &-grid {
 
-
       .row {
         display: grid;
         margin-bottom: 24px;
 
-        @include media("T") {
+        @include media("W") {
           display: flex;
           flex-direction: column;
           margin-bottom: 12px;
@@ -793,7 +795,7 @@ header {
           grid-template-columns: repeat(4, 1fr);
           gap: 24px;
 
-          @include media("T") {
+          @include media("W") {
             gap: 12px;
           }
         }
@@ -803,7 +805,7 @@ header {
           gap: 24px;
           margin-bottom: 0px;
 
-          @include media("T") {
+          @include media("W") {
             gap: 12px;
           }
         }
@@ -815,13 +817,13 @@ header {
       @include flex(sb);
       margin-bottom: 24px;
 
-      @include media("T") {
+      @include media("W") {
         margin-bottom: 0px;
       }
 
       &-wrap {
 
-        @include media("T") {
+        @include media("W") {
           display: flex;
           align-items: center;
           gap: 12px;
@@ -831,7 +833,7 @@ header {
       & h3 {
         color: #111;
 
-        @include media("T") {
+        @include media("W") {
           @include font-style(18, 700);
         }
       }
@@ -841,18 +843,28 @@ header {
     &-inner {
       padding: 32px 32px 0px;
 
-      @include media("T") {
+      @include media("W") {
         padding: 32px;
 
       }
     }
 
     .ul-left {
+      flex: 1;
       min-width: 170px;
+
+      @include media("W") {
+        min-width: 0px;
+      }
 
       @include media("M") {
         margin-bottom: 12px;
+
       }
+    }
+
+    .ul-right {
+      flex: 1;
     }
 
     & ul {
@@ -875,7 +887,7 @@ header {
 
   .ic-arrow-down {
 
-    @include media("T") {
+    @include media("W") {
       display: inline-block;
       width: 24px;
       height: 24px;
@@ -907,7 +919,6 @@ header {
   margin-bottom: 100px;
 
 
-  @include media("T") {}
 
   & .title {
     @include font-style(40, 700);
@@ -922,6 +933,7 @@ header {
 
   &-inner {
     position: relative;
+    width: 100%;
 
     .timeline-track {
       position: absolute;
@@ -933,7 +945,7 @@ header {
       z-index: 1;
       bottom: 122px;
 
-      @include media("T") {
+      @include media("W") {
         transform: none;
         left: 40px;
       }
@@ -950,7 +962,7 @@ header {
       clip-path: inset(0 0 100% 0);
       bottom: 122px;
 
-      @include media("T") {
+      @include media("W") {
         transform: none;
         left: 40px;
       }
@@ -960,16 +972,20 @@ header {
     & .timeline-item {
       position: relative;
       max-width: 640px;
+      // width: 100%;
       display: flex;
       flex-direction: column;
       word-break: keep-all;
-
 
 
       .details {
         display: flex;
         flex-direction: column;
         gap: 20px;
+
+        @include media("W") {
+          padding-right: 30px;
+        }
       }
 
       .year {
@@ -1021,6 +1037,7 @@ header {
       .text {
         @include font-style(16, 400);
         color: #888;
+        line-height: 180%;
       }
 
 
@@ -1029,7 +1046,7 @@ header {
         padding-left: 42px;
         left: 50%;
 
-        @include media("T") {
+        @include media("W") {
           left: 0px;
           padding-left: 83px;
         }
@@ -1044,6 +1061,7 @@ header {
 
           &>div {
             display: flex;
+            align-items: baseline;
           }
 
           .month {
@@ -1054,10 +1072,13 @@ header {
 
       //홀수 아이템
       &:nth-child(odd) {
+
         padding: 40px 43px 40px 0;
         text-align: end;
 
-        @include media("T") {
+
+        @include media("W") {
+          left: 0;
           text-align: start;
           padding: 40px 0px 40px 83px;
         }
@@ -1066,7 +1087,7 @@ header {
           right: -44px;
           transform: translate(50%, -50%);
 
-          @include media("T") {
+          @include media("W") {
             left: -42px;
             transform: translate(-50%, -50%);
           }
@@ -1078,8 +1099,9 @@ header {
           &>div {
             display: flex;
             flex-direction: row-reverse;
+            align-items: baseline;
 
-            @include media("T") {
+            @include media("W") {
               flex-direction: row;
             }
           }
@@ -1087,7 +1109,7 @@ header {
           .month {
             margin-left: 8px;
 
-            @include media("T") {
+            @include media("W") {
               margin-left: 0px;
               margin-right: 8px;
             }

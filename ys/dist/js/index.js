@@ -12,15 +12,17 @@ $(document).ready(function () {
         return window.innerWidth <= 1024;
     }
 
-    if (path === "/" || path === "/index.html") {
+    const isMainPage = path.endsWith("/") || path.endsWith("/index.html");
+
+    if (isMainPage) {
         if (isMobile()) {
             header.addClass("scroll");
-            mainLogo.attr("src", "../../assets/img/logo-b.png");
+            mainLogo.attr("src", "./assets/img/logo-b.png");
             btnInvert.addClass("btn-black");
             icRight.addClass("ic-right-w");
         } else {
             header.addClass("start");
-            mainLogo.attr("src", "../../assets/img/logo-w.png");
+            mainLogo.attr("src", "./assets/img/logo-w.png");
             btnInvert.addClass("btn-white");
             icRight.removeClass("ic-right-w").addClass("ic-right");
 
@@ -29,7 +31,7 @@ $(document).ready(function () {
 
                 header.toggleClass("scroll", scrolled).toggleClass("start", !scrolled);
 
-                mainLogo.attr("src", scrolled ? "../../assets/img/logo-b.png" : "../../assets/img/logo-w.png");
+                mainLogo.attr("src", scrolled ? "./assets/img/logo-b.png" : "./assets/img/logo-w.png");
 
                 btnInvert.toggleClass("btn-black", scrolled).toggleClass("btn-white", !scrolled);
 
